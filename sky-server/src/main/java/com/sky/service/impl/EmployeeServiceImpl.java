@@ -74,8 +74,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public void save(EmployeeDTO employeeDTO) {
+//        System.out.println("当前线程的id:" + Thread.currentThread().getId());
         Employee employee = new Employee();
-        // 对象属性拷贝
+        // 对象属性拷贝 把前端传过来的 employeeDTO 里所有同名属性，自动复制到 employee 里。
         BeanUtils.copyProperties(employeeDTO, employee);
         // 设置账号状态
         employee.setStatus(StatusConstant.ENABLE);
@@ -88,7 +89,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         // employee.setCreateUser(BaseContext.getCurrentId());
         // employee.setUpdateUser(BaseContext.getCurrentId());
 
-        // 保存到数据库
+        // 保存到数据库 employeeMapper = 数据访问层（MyBatis/MyBatis-Plus
         employeeMapper.insert(employee);
     }
 
